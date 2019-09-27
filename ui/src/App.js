@@ -3,17 +3,22 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import { ThemeProvider } from '@material-ui/styles';
 import { Provider, Subscribe } from 'unstated'
 import { createMuiTheme } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core'
 import AppContext from './AppContext';
 import Home from './pages/Home';
 
-const theme = createMuiTheme({
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  }
 })
 
 function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
+        <CssBaseline>
         <Provider>
           <Subscribe to={[AppContext]}>
             {app => (
@@ -26,6 +31,7 @@ function App() {
             )}
           </Subscribe>
         </Provider>
+        </CssBaseline>
       </ThemeProvider>
     </div>
   );
