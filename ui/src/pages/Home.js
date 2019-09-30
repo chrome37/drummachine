@@ -4,11 +4,12 @@ import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box';
 import AppHeader from '../components/AppHeader';
 import Pads from '../components/Pads';
+import SampleTable from '../components/SampleTable';
 
 const useStyles = makeStyles({
     displayBox: {
         height: "270px",
-    }
+    },
 });
 
 const Home = () => {
@@ -16,7 +17,7 @@ const Home = () => {
     return (
         <div>
             <AppHeader title="Dram Machine"/>
-            <Grid container>
+            <Grid container spacing={5}>
                 <Grid item md={12} sm={12} xs={12}>
                     <Box className={classes.displayBox}></Box>
                 </Grid>
@@ -25,7 +26,8 @@ const Home = () => {
                 <Grid item md={4} sm={6} xs={10}>
                     <Pads/>
                 </Grid>
-                <Grid item md={4} sm={3} xs={1}>
+                <Grid item md={4} sm={3} xs={1} >
+                    <SampleTable />
                 </Grid>
             </Grid>
         </div>
