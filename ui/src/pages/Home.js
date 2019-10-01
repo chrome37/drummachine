@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid'
 import AppHeader from '../components/AppHeader';
@@ -23,6 +23,14 @@ const Home = (props) => {
     const {app} = props;
     const classes = useStyles();
 
+    const sampleData = [
+        {pad: "Z", path: `${process.env.PUBLIC_URL}/kit_1/Kick_1.wav`, name: "Kick_1"},
+        {pad: "X", path: `${process.env.PUBLIC_URL}/kit_1/Snare_1.wav`, name: "Snare_1"},
+        {pad: "C", path: `${process.env.PUBLIC_URL}/kit_1/Hi_Hat_1.wav`, name: "Hi_Hat_1"}
+    ]
+
+    const [samples, setSamples] = useState(sampleData);
+
     return (
         <div>
             <AppHeader title={app.state.title}/>
@@ -31,10 +39,10 @@ const Home = (props) => {
                     <Display />
                     <Grid container spacing={1} className={classes.control} justify="center">
                         <Grid item md={6} sm={6} xs={12}>
-                            <Pads/>
+                            <Pads sampleData={samples}/>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12} >
-                            <SampleTable />
+                            <SampleTable sampleData={samples}/>
                         </Grid>
                     </Grid>
                 </div>
