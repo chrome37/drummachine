@@ -64,8 +64,8 @@ const Pads = (props) => {
     });
 
     return (
-        <Grid container spacing={1} className={classes.pads}>
-                {padArr}
+        <Grid container spacing={1} className={classes.pads} item md={12} justify='center'>
+            {padArr}
         </Grid>
     )
 }

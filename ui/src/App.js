@@ -11,6 +11,11 @@ import Home from './pages/Home';
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
+    primary: {
+      main: '#b71c1c',
+      light: '#f05545',
+      dark: '#7f0000'
+    }
   }
 })
 

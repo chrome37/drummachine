@@ -14,8 +14,8 @@ const SampleTable = (props) => {
 
     const columns = [
         {title: 'Pad', field: 'pad'},
-        {title: 'SampleName', field: 'name'},
-		{title: 'actions', field: 'actions'}
+        {title: 'Name', field: 'name'},
+		{title: 'Actions', field: 'actions'}
 	];
 	
 	const options = {
@@ -25,7 +25,7 @@ const SampleTable = (props) => {
 
     return (
 		<Grid container justify='center'>
-			<Grid item md={10}>
+			<Grid item md={11}>
 			<MaterialTable title='Samples' columns={columns} options={options}></MaterialTable>		
 			</Grid>
 		</Grid>
