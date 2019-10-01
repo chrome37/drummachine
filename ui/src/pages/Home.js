@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box';
 import AppHeader from '../components/AppHeader';
 import Pads from '../components/Pads';
 import SampleTable from '../components/SampleTable';
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Home = (props) => {
-    const {app, router} = props;
+    const {app} = props;
     const classes = useStyles();
 
     return (
