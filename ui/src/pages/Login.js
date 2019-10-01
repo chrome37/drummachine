@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppHeader from '../components/AppHeader';
 import { Typography, makeStyles, TextField, Container, Checkbox, FormControlLabel, Button, Grid, Link} from '@material-ui/core';
 
@@ -24,14 +24,24 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    useEffect(() => {
+        if (app.state.isAuthenticated) {
+            router.history.push('home');
+        }
+    });
+
     const handleSubmit = async () => {
         const data = {
             email: email,
             password: password
         }
-        await app.login(data).catch(err => {
+        const result = await app.login(data).catch(err => {
            console.log(err);
         });
+
+        if (result) {
+            router.history.push('/home');
+        }
         
     }
 

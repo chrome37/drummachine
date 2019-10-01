@@ -21,6 +21,14 @@ const theme = createMuiTheme({
 })
 
 function App() {
+  const renderHome = (app, router) => {
+    if (app.state.isAuthenticated) {
+      return <Home app={app} router={router}/>
+    } else {
+      return <Redirect to="/login" />
+    }
+  }
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -30,7 +38,7 @@ function App() {
             {app => (
               <Router>
                 <Switch>
-                  <Route path='/home' render={router => <Home app={app} router={router} />} />
+                  <Route path='/home' render={router => renderHome(app, router)} />
                   <Route path='/login' render={router => <Login app={app} router={router} />} />
                   <Redirect to='/login' />
                 </Switch>

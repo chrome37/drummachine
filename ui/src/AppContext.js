@@ -23,6 +23,7 @@ export default class AppContext extends Container {
         });
         this.setState({token: res.data.token, email: res.data.email, isAuthenticated: true});
         localStorage.setItem('isAuthenticated', true);
+        return res.data;
     }
 
     async logout() {
