@@ -20,6 +20,11 @@ class MongoClient {
         }) 
         return result;
     }
+
+    async getUserByEmail(email) {
+        const result = await this.user.findOne({email: email});
+        return result;
+    }
 }
 
 module.exports = new MongoClient();
