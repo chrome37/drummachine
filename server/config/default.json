@@ -6,5 +6,13 @@
             "useUnifiedTopology": true
         }
     },
+    "cos": {
+        "config": {
+            "endpoint" : "s3.us-south.cloud-object-storage.appdomain.cloud",
+            "apiKeyId" : "xYy4TE8NcGwuYB1jKg7nnlwSR0JeeFtbPlXy30TvrPhP",
+            "ibmAuthEndpoint" : "https://iam.cloud.ibm.com/identity/token",
+            "serviceInstanceId": "crn:v1:bluemix:public:cloud-object-storage:global:a/f4d37ffcf9e34376a81375d75d21e575:d44301a6-7c36-4c5b-b46a-62f577606642::"
+        }
+    },
     "secret": "secret"
 }
