@@ -1,0 +1,9 @@
+{
+    "mongo": {
+        "url": "mongodb://localhost:27018/dev",
+        "options": {
+            "useNewUrlParser": true,
+            "useUnifiedTopology": true
+        }
+    }
+}
