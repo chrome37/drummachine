@@ -26,7 +26,7 @@ const Login = (props) => {
 
     useEffect(() => {
         if (app.state.isAuthenticated) {
-            router.history.push('home');
+            router.history.push('/home');
         }
     });
 

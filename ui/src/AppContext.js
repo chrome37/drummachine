@@ -5,11 +5,13 @@ export default class AppContext extends Container {
     constructor() {
         super();
         const isAuthenticated = localStorage.getItem('isAuthenticated');
+        const token = localStorage.getItem('token');
+        const email = localStorage.getItem('email');
         this.state = {
             title: "Drum Machine",
             isAuthenticated: isAuthenticated,
-            token: "",
-            email: ""
+            token: token,
+            email: email
         }
     }
 
@@ -23,11 +25,15 @@ export default class AppContext extends Container {
         });
         this.setState({token: res.data.token, email: res.data.email, isAuthenticated: true});
         localStorage.setItem('isAuthenticated', true);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('email', res.data.email);
         return res.data;
     }
 
-    async logout() {
+    logout() {
         localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
         this.setState({token: "", email: "", isAuthenticated: false});
     }
 }
