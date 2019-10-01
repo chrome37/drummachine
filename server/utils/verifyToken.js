@@ -1,6 +1,6 @@
 const passport = require('passport');
-const JwtStrategy = require('passport-jwt');
-const ExtractJwt = JwtStrategy.ExtractJwt;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const config = require('config');
 
 
@@ -14,7 +14,7 @@ passport.use(new JwtStrategy(options, (jwtPayload, done) => {
     if (jwtPayload === undefined || jwtPayload.sub === undefined || jwtPayload.email === undefined) {
         return done('Invalid JWT Payload', false);
     } else {
-        return done(null, true);
+        return done(null, jwtPayload);
     }
 }));
 
