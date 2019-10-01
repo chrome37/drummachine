@@ -12,12 +12,6 @@ const useStyles = makeStyles({
             display: "block",
             paddingTop: "100%"
         }
-    },
-    pads: {
-
-    },
-    displayBox: {
-        height: "270px",
     }
 })
 

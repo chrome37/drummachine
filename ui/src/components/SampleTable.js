@@ -24,11 +24,8 @@ const SampleTable = (props) => {
 	}
 
     return (
-		<Grid container justify='center'>
-			<Grid item md={11}>
-			<MaterialTable title='Samples' columns={columns} options={options}></MaterialTable>		
-			</Grid>
-		</Grid>
+		<MaterialTable title='Samples' columns={columns} options={options}></MaterialTable>		
+
     );
 }
 

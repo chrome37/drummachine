@@ -6,30 +6,40 @@ import AppHeader from '../components/AppHeader';
 import Pads from '../components/Pads';
 import SampleTable from '../components/SampleTable';
 import Display from '../components/Display';
+import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles({
-});
+const useStyles = makeStyles(theme => ({
+    paper: {
+        marginTop: theme.spacing(4),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    control: {
+        marginTop: theme.spacing(4)
+    }
+}));
 
 const Home = (props) => {
     const {app, router} = props;
     const classes = useStyles();
-    
+
     return (
         <div>
             <AppHeader title={app.state.title}/>
-            <Grid container spacing={5}>
-                <Grid item md={12} sm={12} xs={12} container justify='center'>
+            <Container component="main" maxWidth="md" >
+                <div className={classes.paper}>
                     <Display />
-                </Grid>
-                <Grid item md={4} sm={3} xs={1}>
-                </Grid>
-                <Grid item md={4} sm={6} xs={10}>
-                    <Pads/>
-                </Grid>
-                <Grid item md={4} sm={3} xs={1} >
-                    <SampleTable />
-                </Grid>
-            </Grid>
+                    <Grid container spacing={1} className={classes.control} justify="center">
+                        <Grid item md={6} sm={6} xs={12}>
+                            <Pads/>
+                        </Grid>
+                        <Grid item md={6} sm={6} xs={12} >
+                            <SampleTable />
+                        </Grid>
+                    </Grid>
+                </div>
+            </Container>
         </div>
         )
 }
