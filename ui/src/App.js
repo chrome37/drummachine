@@ -6,6 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core'
 import AppContext from './AppContext';
 import Home from './pages/Home';
+import Login from './pages/Login';
 
 
 const theme = createMuiTheme({
@@ -30,7 +31,8 @@ function App() {
               <Router>
                 <Switch>
                   <Route path='/home' render={router => <Home app={app} router={router} />} />
-                  <Redirect to='/home' />
+                  <Route path='/login' render={router => <Login app={app} router={router} />} />
+                  <Redirect to='/login' />
                 </Switch>
               </Router>
             )}

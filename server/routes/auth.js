@@ -26,7 +26,11 @@ passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'passwor
 
         const secret = config.secret;
         const token = jwt.sign(payload, secret, signOpt);
-        return done(null, token);
+        const data = {
+          token: token,
+          email: user.email
+        }
+        return done(null, data);
       } else {
         return done(null, false);
       }

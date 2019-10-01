@@ -10,11 +10,13 @@ import Display from '../components/Display';
 const useStyles = makeStyles({
 });
 
-const Home = () => {
+const Home = (props) => {
+    const {app, router} = props;
     const classes = useStyles();
+    
     return (
         <div>
-            <AppHeader title="Drum Machine"/>
+            <AppHeader title={app.state.title}/>
             <Grid container spacing={5}>
                 <Grid item md={12} sm={12} xs={12} container justify='center'>
                     <Display />
