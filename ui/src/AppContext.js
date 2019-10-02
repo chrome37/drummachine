@@ -36,4 +36,12 @@ export default class AppContext extends Container {
         localStorage.removeItem('email');
         this.setState({token: "", email: "", isAuthenticated: false});
     }
+
+    http() {
+        if (this.state.isAuthenticated) {
+            return axios.create({headers: {authorization: `bearer ${this.state.token}`}})
+        } else {
+            return axios;
+        }
+    }
 }

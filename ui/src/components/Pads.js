@@ -64,9 +64,6 @@ const Pads = (props) => {
     const classes = useStyles();
     const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"]
     const {sampleData} = props;
-
-    console.log(sampleData);
-
     const padArr = padNames.map(padName => {
         const sample = sampleData.filter(sample => sample.pad === padName)[0];
         return (

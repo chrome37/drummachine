@@ -22,14 +22,20 @@ const useStyles = makeStyles(theme => ({
 const Home = (props) => {
     const {app} = props;
     const classes = useStyles();
+    const [samples, setSamples] = useState([]);
+    const [kit, setKit] = useState('user-5d92c2c944ffdbd2e2fe3e4b-kit-1');
+    const [userId, setUserId] = useState('5d92c2c944ffdbd2e2fe3e4b');
 
-    const sampleData = [
-        {pad: "Z", path: `${process.env.PUBLIC_URL}/kit_1/Kick_1.wav`, name: "Kick_1"},
-        {pad: "X", path: `${process.env.PUBLIC_URL}/kit_1/Snare_1.wav`, name: "Snare_1"},
-        {pad: "C", path: `${process.env.PUBLIC_URL}/kit_1/Hi_Hat_1.wav`, name: "Hi_Hat_1"}
-    ]
-
-    const [samples, setSamples] = useState(sampleData);
+    useEffect(() => {
+        async function fetchData() {
+            const result = await app.http().get(`http://localhost:5000/api/v1/users/${userId}/kits/${kit}`).catch(err => {
+                console.log(err);
+            });
+            setSamples(result.data.contents);
+        }
+        fetchData();
+    }, [kit]);
+    
 
     return (
         <div>

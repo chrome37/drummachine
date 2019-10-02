@@ -25,7 +25,6 @@ router.get('/:userId/kits/:kitName', passport.authenticate('jwt', {session: fals
             console.log(err);
             res.sendStatus(500);
         });
-        console.log(result);
         const endpoint = config.cos.config.endpoint;
         const contents = result.Contents.map(item => {
             return {
