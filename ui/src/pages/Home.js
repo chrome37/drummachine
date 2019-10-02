@@ -36,6 +36,15 @@ const Home = (props) => {
         fetchData();
     }, [kit]);
     
+    const handleAssign = (sampleName) => {
+        const newSamples = samples.map(item => {
+            if(sampleName === item.name) {
+                item.pad = 'Z';
+            }
+            return item
+        })
+        setSamples(newSamples);
+    }
 
     return (
         <div>
@@ -48,7 +57,7 @@ const Home = (props) => {
                             <Pads sampleData={samples}/>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12} >
-                            <SampleTable sampleData={samples}/>
+                            <SampleTable sampleData={samples} handleAssign={handleAssign}/>
                         </Grid>
                     </Grid>
                 </div>

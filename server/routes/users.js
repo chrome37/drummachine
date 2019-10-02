@@ -29,7 +29,7 @@ router.get('/:userId/kits/:kitName', passport.authenticate('jwt', {session: fals
         const contents = result.Contents.map(item => {
             return {
                 pad: "",
-                path:  new URL(`https://${endpoint}/${kitName}/${item.Key}`),
+                path:  new URL(`http://localhost:5000/api/v1/users/${userId}/kits/${kitName}/${item.Key}`),
                 name: item.Key
             }
         })
@@ -41,7 +41,7 @@ router.get('/:userId/kits/:kitName', passport.authenticate('jwt', {session: fals
     }   
 );
 
-router.get('/:userId/kits/:kitName/:sampleName', passport.authenticate('jwt', {session: false}), 
+router.get('/:userId/kits/:kitName/:sampleName', 
     async (req, res) => {
         const userId = req.params.userId;
         const kitName = req.params.kitName;
@@ -50,6 +50,7 @@ router.get('/:userId/kits/:kitName/:sampleName', passport.authenticate('jwt', {s
             console.log(err);
             res.sendStatus(500);
         });
+        console.log(result.Body);
         res.send(result.Body);
     }
 )

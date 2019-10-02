@@ -11,22 +11,16 @@ const useStyle = makeStyles(theme =>({
 	}
 }));
 
-const PadNameInput = (props) => {
-	const {padName} = props;
-	const [input, setInput] = useState(padName);
-
-	const handleChange = e => {
-		setInput(e.target.value);
-	}
-
-	return(
-		<TextField value={input} onChange={(e) => handleChange(e)}></TextField>
+const AssignButton = props => {
+	const {sampleName, handleAssign} = props;
+	return (
+		<Button onClick={() => handleAssign(sampleName)}>Assign</Button>
 	)
 }
 
 const SampleTable = (props) => {
 	const classes = useStyle();
-	const {sampleData} = props;
+	const {sampleData, handleAssign} = props;
 
     const columns = [
         {title: 'Pad', field: 'pad'},
@@ -40,7 +34,7 @@ const SampleTable = (props) => {
 	}
 
 	const data = sampleData.map(item => {
-		return ({pad: <PadNameInput padName={item.pad}/>, name: item.name});
+		return ({pad: item.pad, name: item.name, actions: <AssignButton handleAssign={handleAssign} sampleName={item.name}/>});
 	});
 
     return (
