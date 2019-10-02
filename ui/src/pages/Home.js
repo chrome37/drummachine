@@ -36,10 +36,10 @@ const Home = (props) => {
         fetchData();
     }, [kit]);
     
-    const handleAssign = (sampleName) => {
+    const handleAssign = (sampleName, value) => {
         const newSamples = samples.map(item => {
             if(sampleName === item.name) {
-                item.pad = 'Z';
+                item.pad = value;
             }
             return item
         })

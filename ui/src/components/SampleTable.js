@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import MaterialTable from 'material-table';
 import {makeStyles} from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
+import { Select, Button, Grid, MenuItem } from '@material-ui/core';
 
 const useStyle = makeStyles(theme =>({
 	tableWrapper: {
@@ -13,8 +12,25 @@ const useStyle = makeStyles(theme =>({
 
 const AssignButton = props => {
 	const {sampleName, handleAssign} = props;
+	const [value, setValue] = useState('');
+	const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"];
+
+	const menuItems = padNames.map(pad => {
+		return(
+			<MenuItem value={pad} key={pad}>{pad}</MenuItem>
+		)
+	});
+
+	const handleChange = (e) => {
+		setValue(e.target.value)
+	}
 	return (
-		<Button onClick={() => handleAssign(sampleName)}>Assign</Button>
+		<div>
+			<Select value={value} onChange={(e) => handleChange(e)}>
+				{menuItems}
+			</Select>
+			<Button onClick={() => handleAssign(sampleName, value)}>Assign</Button>
+		</div>
 	)
 }
 
