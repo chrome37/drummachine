@@ -23,8 +23,13 @@ const Home = (props) => {
     const {app} = props;
     const classes = useStyles();
     const [samples, setSamples] = useState([]);
+    const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"];
+    const [notAssignedPads, setNotAssignedPads] = useState(padNames);
+
     const [kit, setKit] = useState('user-5d92c2c944ffdbd2e2fe3e4b-kit-1');
     const [userId, setUserId] = useState('5d92c2c944ffdbd2e2fe3e4b');
+
+    
 
     useEffect(() => {
         async function fetchData() {
@@ -44,6 +49,9 @@ const Home = (props) => {
             return item
         })
         setSamples(newSamples);
+        const assignedPadNames = newSamples.filter(item => item.pad !== "").map(item => item.pad);
+        const notAssignedPadNames = padNames.filter(pad => !assignedPadNames.includes(pad));
+        setNotAssignedPads(notAssignedPadNames);
     }
 
     return (
@@ -57,7 +65,7 @@ const Home = (props) => {
                             <Pads sampleData={samples}/>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12} >
-                            <SampleTable sampleData={samples} handleAssign={handleAssign}/>
+                            <SampleTable sampleData={samples} handleAssign={handleAssign} notAssigned={notAssignedPads}/>
                         </Grid>
                     </Grid>
                 </div>

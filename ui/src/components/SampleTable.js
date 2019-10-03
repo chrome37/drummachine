@@ -10,10 +10,9 @@ const useStyle = makeStyles(theme =>({
 	}
 }));
 
-const AssignButton = props => {
-	const {sampleName, handleAssign} = props;
+const AssignForm = props => {
+	const {sampleName, handleAssign, padNames} = props;
 	const [value, setValue] = useState('');
-	const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"];
 
 	const menuItems = padNames.map(pad => {
 		return(
@@ -22,6 +21,7 @@ const AssignButton = props => {
 	});
 
 	const handleChange = (e) => {
+		handleAssign(sampleName, e.target.value);
 		setValue(e.target.value)
 	}
 	return (
@@ -29,14 +29,13 @@ const AssignButton = props => {
 			<Select value={value} onChange={(e) => handleChange(e)}>
 				{menuItems}
 			</Select>
-			<Button onClick={() => handleAssign(sampleName, value)}>Assign</Button>
 		</div>
 	)
 }
 
 const SampleTable = (props) => {
 	const classes = useStyle();
-	const {sampleData, handleAssign} = props;
+	const {sampleData, handleAssign, notAssigned} = props;
 
     const columns = [
         {title: 'Pad', field: 'pad'},
@@ -50,7 +49,10 @@ const SampleTable = (props) => {
 	}
 
 	const data = sampleData.map(item => {
-		return ({pad: item.pad, name: item.name, actions: <AssignButton handleAssign={handleAssign} sampleName={item.name}/>});
+		return ({
+			pad: <AssignForm handleAssign={handleAssign} sampleName={item.name} padNames={notAssigned}/>, 
+			name: item.name
+		});
 	});
 
     return (
