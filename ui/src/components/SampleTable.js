@@ -11,8 +11,9 @@ const useStyle = makeStyles(theme =>({
 }));
 
 const AssignForm = props => {
-	const {sampleName, handleAssign, padNames} = props;
+	const {sampleName, handleAssign} = props;
 	const [value, setValue] = useState('');
+	const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"];
 
 	const menuItems = padNames.map(pad => {
 		return(
@@ -35,7 +36,7 @@ const AssignForm = props => {
 
 const SampleTable = (props) => {
 	const classes = useStyle();
-	const {sampleData, handleAssign, notAssigned} = props;
+	const {samples, handleAssign} = props;
 
     const columns = [
         {title: 'Pad', field: 'pad'},
@@ -48,9 +49,10 @@ const SampleTable = (props) => {
 		paging: false
 	}
 
-	const data = sampleData.map(item => {
+	const data = samples.map(item => {
+		console.log(item);
 		return ({
-			pad: <AssignForm handleAssign={handleAssign} sampleName={item.name} padNames={notAssigned}/>, 
+			pad: <AssignForm handleAssign={handleAssign} sampleName={item.name} />, 
 			name: item.name
 		});
 	});

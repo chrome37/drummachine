@@ -25,10 +25,8 @@ router.get('/:userId/kits/:kitName', passport.authenticate('jwt', {session: fals
             console.log(err);
             res.sendStatus(500);
         });
-        const endpoint = config.cos.config.endpoint;
         const contents = result.Contents.map(item => {
             return {
-                pad: "",
                 path:  new URL(`http://localhost:5000/api/v1/users/${userId}/kits/${kitName}/${item.Key}`),
                 name: item.Key
             }

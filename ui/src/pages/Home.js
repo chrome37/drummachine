@@ -22,36 +22,36 @@ const useStyles = makeStyles(theme => ({
 const Home = (props) => {
     const {app} = props;
     const classes = useStyles();
-    const [samples, setSamples] = useState([]);
-    const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"];
-    const [notAssignedPads, setNotAssignedPads] = useState(padNames);
+    const [assignMap, setAssignMap] = useState([]);
 
     const [kit, setKit] = useState('user-5d92c2c944ffdbd2e2fe3e4b-kit-1');
     const [userId, setUserId] = useState('5d92c2c944ffdbd2e2fe3e4b');
-
-    
 
     useEffect(() => {
         async function fetchData() {
             const result = await app.http().get(`http://localhost:5000/api/v1/users/${userId}/kits/${kit}`).catch(err => {
                 console.log(err);
             });
-            setSamples(result.data.contents);
+            const newAssignMap = result.data.contents.map(sample => {
+                return {
+                    pad: "",
+                    name: sample.name,
+                    path: sample.path 
+                }
+            });
+            await setAssignMap(newAssignMap);
         }
         fetchData();
     }, [kit]);
     
     const handleAssign = (sampleName, value) => {
-        const newSamples = samples.map(item => {
-            if(sampleName === item.name) {
+        const newAssignMap = assignMap.map(item => {
+            if (item.name === sampleName) {
                 item.pad = value;
             }
-            return item
-        })
-        setSamples(newSamples);
-        const assignedPadNames = newSamples.filter(item => item.pad !== "").map(item => item.pad);
-        const notAssignedPadNames = padNames.filter(pad => !assignedPadNames.includes(pad));
-        setNotAssignedPads(notAssignedPadNames);
+            return item;
+        });
+        setAssignMap(newAssignMap);
     }
 
     return (
@@ -62,10 +62,10 @@ const Home = (props) => {
                     <Display />
                     <Grid container spacing={1} className={classes.control} justify="center">
                         <Grid item md={6} sm={6} xs={12}>
-                            <Pads sampleData={samples}/>
+                            <Pads assignMap={assignMap}/>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12} >
-                            <SampleTable sampleData={samples} handleAssign={handleAssign} notAssigned={notAssignedPads}/>
+                            <SampleTable samples={assignMap} handleAssign={handleAssign} />
                         </Grid>
                     </Grid>
                 </div>

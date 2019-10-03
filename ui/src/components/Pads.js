@@ -63,9 +63,10 @@ const Pad = (props) => {
 const Pads = (props) => {
     const classes = useStyles();
     const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"]
-    const {sampleData} = props;
+    const {assignMap} = props;
+
     const padArr = padNames.map(padName => {
-        const sample = sampleData.filter(sample => sample.pad === padName)[0];
+        const sample = assignMap.filter(sample => sample.pad === padName)[0];
         return (
             <Grid item md={3} sm={3} xs={3} key={padName}>
                 <Pad padName={padName} sample={sample}/>
