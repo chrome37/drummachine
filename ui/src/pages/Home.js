@@ -48,7 +48,7 @@ const Home = (props) => {
             setSampleData(result.data.contents);
         }
         fetchData();
-    }, [kit, app, userId]);
+    }, [app]);
     
     const handleAssign = (padName, value) => {
         const newPadData= padData.map(item => {

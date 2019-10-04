@@ -22,7 +22,7 @@ const Pad = (props) => {
     const [sound, setSound] = useState(null);
 
     useEffect(() => {
-        if (sample) {
+        if (sample.path) {
             const howl = new Howl({
                 src: [sample.path]
             });
@@ -30,7 +30,7 @@ const Pad = (props) => {
         } else if (sound) {
             setSound(null);
         }
-    }, [sample, sound]);
+    }, [sample]);
 
     const handleClick = () => {
         if(sound) {
