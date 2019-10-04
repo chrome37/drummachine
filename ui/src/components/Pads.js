@@ -23,7 +23,7 @@ const Pad = (props) => {
     const [sound, setSound] = useState(null);
 
     useEffect(() => {
-        if (!!sample) {
+        if (sample) {
             const howl = new Howl({
                 src: [sample.path]
             });

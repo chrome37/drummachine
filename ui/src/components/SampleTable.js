@@ -20,10 +20,11 @@ const SampleSelect = (props) => {
 	}
 
 	const items = samples.map(sample => {
-		return(<MenuItem value={sample} key={sample.name}>{sample.name}</MenuItem>)
+		return(<MenuItem value={sample} key={sample.name} dense={true}>{sample.name}</MenuItem>)
 	})
 	return (
 		<Select value={value} onChange={(e) => handleChange(e)}>
+			<MenuItem value={null} dense={true}>None</MenuItem>
 			{items}
 		</Select>
 	)
