@@ -24,7 +24,7 @@ const SampleSelect = (props) => {
 	})
 	return (
 		<Select value={value} onChange={(e) => handleChange(e)}>
-			<MenuItem value={null} dense={true}>None</MenuItem>
+			<MenuItem value={{path: '', name: ''}} dense={true}>None</MenuItem>
 			{items}
 		</Select>
 	)

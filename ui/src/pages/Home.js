@@ -68,7 +68,7 @@ const Home = (props) => {
                     <Display />
                     <Grid container spacing={1} className={classes.control} justify="center">
                         <Grid item md={6} sm={6} xs={12}>
-                            <Pads padData={padData}/>
+                            <Pads padData={padData} app={app}/>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12} >
                             <SampleTable samples={sampleData} handleAssign={handleAssign} padData={padData}/>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid'
-import {Howl, Howler} from 'howler';
+import AudioHelper from '../common/audioHelper';
 
 const useStyles = makeStyles({
     pad: {
@@ -18,23 +18,28 @@ const useStyles = makeStyles({
 
 const Pad = (props) => {
     const classes = useStyles();
-    const {padName, sample} = props;
+    const {padName, sample, app} = props;
     const [sound, setSound] = useState(null);
+    const audioHelper = new AudioHelper(new AudioContext());
 
     useEffect(() => {
-        if (sample.path) {
-            const howl = new Howl({
-                src: [sample.path]
-            });
-            setSound(howl);
-        } else if (sound) {
-            setSound(null);
+        const fetchSample = async() =>{
+            if (sample.path) {
+                const sound = await audioHelper.load(sample.path, app.state.token).catch(err => {
+                    console.log(err);
+                });
+                setSound(sound);
+            } else if (sound) {
+                setSound(null);
+            }
         }
+        fetchSample();
     }, [sample]);
 
     const handleClick = () => {
         if(sound) {
-            sound.play();
+            const src = audioHelper.createSource(sound);
+            src.start();
         }
     }
 
@@ -63,12 +68,12 @@ const Pad = (props) => {
 
 const Pads = (props) => {
     const classes = useStyles();
-    const {padData} = props;
+    const {padData, app} = props;
 
     const padArr = padData.map(pad => {
         return (
             <Grid item md={3} sm={3} xs={3} key={pad.padName}>
-                <Pad padName={pad.padName} sample={pad.sample}/>
+                <Pad padName={pad.padName} sample={pad.sample} app={app}/>
             </Grid>
         )
     });
