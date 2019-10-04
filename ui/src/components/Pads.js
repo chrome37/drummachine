@@ -28,6 +28,8 @@ const Pad = (props) => {
                 src: [sample.path]
             });
             setSound(howl);
+        } else if (sound) {
+            setSound(null);
         }
     }, [sample]);
 
@@ -62,14 +64,12 @@ const Pad = (props) => {
 
 const Pads = (props) => {
     const classes = useStyles();
-    const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"]
-    const {assignMap} = props;
+    const {padData} = props;
 
-    const padArr = padNames.map(padName => {
-        const sample = assignMap.filter(sample => sample.pad === padName)[0];
+    const padArr = padData.map(pad => {
         return (
-            <Grid item md={3} sm={3} xs={3} key={padName}>
-                <Pad padName={padName} sample={sample}/>
+            <Grid item md={3} sm={3} xs={3} key={pad.padName}>
+                <Pad padName={pad.padName} sample={pad.sample}/>
             </Grid>
         )
     });

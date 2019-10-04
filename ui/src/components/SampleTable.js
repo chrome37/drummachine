@@ -10,57 +10,52 @@ const useStyle = makeStyles(theme =>({
 	}
 }));
 
-const AssignForm = props => {
-	const {sampleName, handleAssign} = props;
+const SampleSelect = (props) => {
+	const {samples, handleAssign, pad} = props;
 	const [value, setValue] = useState('');
-	const padNames = ["1", "2", "3", "4", "Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"];
-
-	const menuItems = padNames.map(pad => {
-		return(
-			<MenuItem value={pad} key={pad}>{pad}</MenuItem>
-		)
-	});
 
 	const handleChange = (e) => {
-		handleAssign(sampleName, e.target.value);
-		setValue(e.target.value)
+		setValue(e.target.value);
+		handleAssign(pad, e.target.value);
 	}
+
+	const items = samples.map(sample => {
+		return(<MenuItem value={sample} key={sample.name}>{sample.name}</MenuItem>)
+	})
 	return (
-		<div>
-			<Select value={value} onChange={(e) => handleChange(e)}>
-				{menuItems}
-			</Select>
-		</div>
+		<Select value={value} onChange={(e) => handleChange(e)}>
+			{items}
+		</Select>
 	)
 }
 
 const SampleTable = (props) => {
 	const classes = useStyle();
-	const {samples, handleAssign} = props;
+	const {samples, handleAssign, padData} = props;
 
     const columns = [
         {title: 'Pad', field: 'pad'},
-        {title: 'Name', field: 'name'},
+        {title: 'Sample Assign', field: 'sampleAssign'},
 		{title: 'Actions', field: 'actions'}
 	];
 	
 	const options = {
 		search: false,
-		paging: false
+		paging: false,
+		padding: 'dense'
 	}
 
-	const data = samples.map(item => {
-		console.log(item);
-		return ({
-			pad: <AssignForm handleAssign={handleAssign} sampleName={item.name} />, 
-			name: item.name
-		});
-	});
+	const data = padData.map(pad => {
+		return {
+			pad: pad.padName,
+			sampleAssign: <SampleSelect samples={samples} handleAssign={handleAssign} pad={pad.padName} key={pad.padName}/>
+		}
+	})
 
     return (
 		<div className={classes.tableWrapper}>
 			<MaterialTable 
-				title='Samples' 
+				title='Pad Data' 
 				columns={columns} 
 				options={options} 
 				data={data}
