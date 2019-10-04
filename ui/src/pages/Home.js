@@ -37,8 +37,8 @@ const Home = (props) => {
         })
     );
 
-    const [kit, setKit] = useState('user-5d92c2c944ffdbd2e2fe3e4b-kit-1');
-    const [userId, setUserId] = useState('5d92c2c944ffdbd2e2fe3e4b');
+    const kit= 'user-5d92c2c944ffdbd2e2fe3e4b-kit-1';
+    const userId = '5d92c2c944ffdbd2e2fe3e4b' ;
 
     useEffect(() => {
         async function fetchData() {
@@ -48,7 +48,7 @@ const Home = (props) => {
             setSampleData(result.data.contents);
         }
         fetchData();
-    }, [kit]);
+    }, [kit, app, userId]);
     
     const handleAssign = (padName, value) => {
         const newPadData= padData.map(item => {

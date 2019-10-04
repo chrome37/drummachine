@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid'
 import {Howl, Howler} from 'howler';
-import axios from 'axios';
 
 const useStyles = makeStyles({
     pad: {
@@ -31,7 +30,7 @@ const Pad = (props) => {
         } else if (sound) {
             setSound(null);
         }
-    }, [sample]);
+    }, [sample, sound]);
 
     const handleClick = () => {
         if(sound) {
