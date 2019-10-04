@@ -6,6 +6,7 @@ import Pads from '../components/Pads';
 import SampleTable from '../components/SampleTable';
 import Display from '../components/Display';
 import Container from '@material-ui/core/Container';
+import constants from '../common/constants';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -25,10 +26,7 @@ const Home = (props) => {
     const [sampleData, setSampleData] = useState([]);
 
     const [padData, setPadData] = useState(
-        ["1", "2", "3", "4", 
-        "Q", "W", "E", "R", 
-        "A", "S", "D", "F", 
-        "Z", "X", "C", "V"].map(item => {
+        constants.pads.map(item => {
             return {
                 padName: item,
                 sample: {
