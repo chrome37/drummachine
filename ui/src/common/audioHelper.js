@@ -10,7 +10,7 @@ class AudioHelper {
             throw err;
         });
         return await this.ctx.decodeAudioData(res.data).catch(err => {
-            console.log(err);
+            throw err;
         });
     }
 
